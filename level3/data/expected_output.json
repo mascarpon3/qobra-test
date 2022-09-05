@@ -1,0 +1,17 @@
+{
+  "commissions": [
+    {
+      "user_id": 1,
+      "commission": {
+        "2018-05": "xxx",
+        "2018-06": "xxx"
+      }
+    },
+  ],
+  "deals": [
+    {
+      "id": 1,
+      "commission": "xxx"
+    },
+  ]
+}
