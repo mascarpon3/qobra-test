@@ -53,9 +53,9 @@ if __name__ == "__main__":
     output = [
         {
             "user_id": user_id,
-            "commission": user.set_index("close_date")["commission"].to_dict()
+            "commission": user_deals.set_index("close_date")["commission"].to_dict()
         }
-        for user_id, user in deals.groupby("user")
+        for user_id, user_deals in deals.groupby("user")
     ]
 
     with open("data/output.json", "w") as f:

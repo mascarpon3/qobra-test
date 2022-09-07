@@ -41,9 +41,10 @@ const getPartition = (value, bornInf, bornSup) => {
     }
 }
 
-var fs = require("fs")
+const fs = require("fs")
 var input = JSON.parse(fs.readFileSync("data/input.json"))
 
 const users = getFullUsersData(input["users"], input["deals"])
 const output = users.map(computeCommissions)
+
 fs.writeFileSync("data/output.json", JSON.stringify(output), encoding="utf-8")
