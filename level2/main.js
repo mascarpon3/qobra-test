@@ -10,24 +10,26 @@ const getFullUsersData = (users, deals) => {
     return users
 }
 
-const computeComissions = user => {
-    const {partion_0, partion_1, partion_2} = splitTotalAmountByObjective(
+const computeCommissions = user => {
+    const {partition_0, partition_1, partition_2} = splitTotalAmountByObjective(
         user.total_amount, user.objective
     ) 
     return {
         user_id : user.id,
-        commision: 0.05 * partion_0 + 0.1 * partion_1 + 0.15 * partion_2,
+        commission: 0.05 * partition_0 + 0.1 * partition_1 + 0.15 * partition_2,
     }
 }
 
 
 const splitTotalAmountByObjective = (total_amount, objective) => {
-    return {
-        partion_0: getPartition(total_amount, 0, 0.5 * objective),
-        partion_1: getPartition(total_amount, 0.5 * objective, objective),
-        partion_2: getPartition(total_amount, objective, Infinity)
+     // this function splits the amount according to which commission ratio is applied to it.
+     return {
+        partition_0: getPartition(total_amount, 0, 0.5 * objective),
+        partition_1: getPartition(total_amount, 0.5 * objective, objective),
+        partition_2: getPartition(total_amount, objective, Infinity)
     }
 }
+
 
 const getPartition = (value, bornInf, bornSup) => {
     if (value < bornInf){
@@ -41,6 +43,7 @@ const getPartition = (value, bornInf, bornSup) => {
 
 var fs = require("fs")
 var input = JSON.parse(fs.readFileSync("data/input.json"))
+
 const users = getFullUsersData(input["users"], input["deals"])
-const output = users.map(computeComissions)
+const output = users.map(computeCommissions)
 fs.writeFileSync("data/output.json", JSON.stringify(output), encoding="utf-8")
