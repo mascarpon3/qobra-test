@@ -1,5 +1,3 @@
-import input from "/level2/data/input.json" assert {type: 'json'}
-
 const getFullUsersData = (users, deals) => {
     var users = users.map(u => ({...u, ...{total_amount: 0, nb_deals: 0}}))
     for (var deal_index in deals){
@@ -41,6 +39,8 @@ const getPartition = (value, bornInf, bornSup) => {
     }
 }
 
+var fs = require("fs")
+var input = JSON.parse(fs.readFileSync("data/input.json"))
 const users = getFullUsersData(input["users"], input["deals"])
 const output = users.map(computeComissions)
 
